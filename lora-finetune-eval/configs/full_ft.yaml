@@ -1,0 +1,24 @@
+# Baseline 2: full fine-tuning of all 67M parameters.
+name: full_ft
+model_name: distilbert/distilbert-base-uncased
+strategy: full
+lora: null
+data:
+  agreement: all          # 2,264 sentences with unanimous annotator agreement
+  val_fraction: 0.15
+  test_fraction: 0.15
+  max_length: 128
+  seed: 42
+train:
+  epochs: 6
+  lr: 3.0e-5
+  batch_size: 32
+  weight_decay: 0.01
+  warmup_ratio: 0.06
+  max_grad_norm: 1.0
+  precision: auto         # bf16 on CUDA, fp32 on CPU
+  seed: 42
+  patience: 2
+  device: auto
+out_dir: runs
+n_boot: 1000

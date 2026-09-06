@@ -1,0 +1,1 @@
+{"prompt": "<|im_start|>user\nName three risks a bank faces when lending to small businesses.<|im_end|>\n<|im_start|>assistant\n", "max_tokens": 60, "temperature": 0.7, "seed": 1}

@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nanoformer"
+version = "0.1.0"
+description = "A LLaMA-style decoder-only Transformer implemented from first principles in PyTorch: RMSNorm, RoPE, GQA, SwiGLU, KV cache, byte-level BPE, AMP trainer."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "River He" }]
+dependencies = [
+  "torch>=2.4",
+  "numpy>=1.26",
+  "pyyaml>=6.0",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3",
+  "pytest-cov>=5.0",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "types-PyYAML",
+  "types-tqdm",
+  "matplotlib>=3.9",
+]
+
+[project.scripts]
+nanoformer = "nanoformer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "C4", "PT", "RUF", "PIE", "RET", "ARG"]
+ignore = ["RUF012", "N812"]  # N812: `import torch.nn.functional as F` is the PyTorch convention
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG001", "PT011", "PT018", "E501", "RUF001"]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests"]
+warn_unreachable = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = ["matplotlib.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --cov=nanoformer --cov-report=term-missing"
+markers = [
+  "slow: long-running tests (deselect with -m 'not slow')",
+  "gpu: requires a CUDA device",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["nanoformer"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:", "raise NotImplementedError"]

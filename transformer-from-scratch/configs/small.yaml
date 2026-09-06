@@ -1,0 +1,37 @@
+# GPU configuration used for the results in README.md (RTX 4070, ~1 minute).
+# ~9.4M non-embedding parameters, GQA with 2 KV heads, bf16 autocast.
+# Tiny Shakespeare is only 415k training tokens = 25 steps per epoch at 16k tokens/step,
+# so this is a data-limited regime: dropout 0.2, 600 steps (24 epochs) and best-val
+# checkpoint selection. Training longer only memorises the corpus (see README).
+model:
+  vocab_size: 1024
+  d_model: 384
+  n_layers: 6
+  n_heads: 6
+  n_kv_heads: 2
+  max_seq_len: 256
+  dropout: 0.2
+
+train:
+  out_dir: runs/small
+  batch_size: 64
+  block_size: 256
+  grad_accum_steps: 1
+  max_steps: 600
+  lr: 6.0e-4
+  min_lr: 6.0e-5
+  warmup_steps: 60
+  weight_decay: 0.1
+  grad_clip: 1.0
+  eval_interval: 50
+  eval_iters: 40
+  checkpoint_interval: 300
+  log_interval: 25
+  precision: bf16
+  device: auto
+  seed: 1337
+
+data:
+  tokenizer: artifacts/tokenizer_1024.json
+  train_bin: data/tinyshakespeare/train.bin
+  val_bin: data/tinyshakespeare/val.bin

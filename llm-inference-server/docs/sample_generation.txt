@@ -1,0 +1,5 @@
+2026-09-05 19:58:03,711 INFO llmserve.engine: loading Qwen/Qwen2.5-0.5B-Instruct on cuda (torch.bfloat16)
+2026-09-05 19:58:04,125 WARNING huggingface_hub.utils._http: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cli-0] finish=stop tokens=50 latency=1311ms
+A credit default swap is a financial agreement that allows one party (the swap buyer) to secure a loan by providing a guarantee for the other party (the swap seller), which in return allows the swap buyer to receive interest payments on the loan.
+

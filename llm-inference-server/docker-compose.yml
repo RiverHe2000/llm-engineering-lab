@@ -1,0 +1,25 @@
+services:
+  llmserve:
+    build: .
+    image: llmserve:latest
+    ports:
+      - "8000:8000"
+    environment:
+      LLMSERVE_MODEL_NAME: distilbert/distilgpt2
+      LLMSERVE_DEVICE: cpu
+      LLMSERVE_QUANTIZE_INT8: "true"
+      LLMSERVE_MAX_BATCH_SIZE: "8"
+      LLMSERVE_BATCH_WINDOW_MS: "10"
+      LLMSERVE_MAX_NEW_TOKENS_LIMIT: "128"
+      LLMSERVE_LOG_LEVEL: INFO
+    volumes:
+      - hf-cache:/models        # model weights survive container restarts
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 4g
+    restart: unless-stopped
+
+volumes:
+  hf-cache:

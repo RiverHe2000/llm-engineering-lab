@@ -1,0 +1,25 @@
+# Repository-level ignores; each project also has its own .gitignore for its
+# run artefacts (checkpoints, evaluation runs, MLflow stores, indexes).
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Local logs, editors, OS
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

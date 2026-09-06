@@ -1,0 +1,13 @@
+llmserve_requests_total{status="ok"} 17.0
+llmserve_request_latency_seconds_count 17.0
+llmserve_generated_tokens_total 1020.0
+llmserve_batch_size_bucket{le="1.0"} 2.0
+llmserve_batch_size_bucket{le="2.0"} 2.0
+llmserve_batch_size_bucket{le="4.0"} 2.0
+llmserve_batch_size_bucket{le="8.0"} 2.0
+llmserve_batch_size_bucket{le="16.0"} 3.0
+llmserve_batch_size_bucket{le="32.0"} 3.0
+llmserve_batch_size_bucket{le="64.0"} 3.0
+llmserve_batch_size_bucket{le="128.0"} 3.0
+llmserve_batch_size_bucket{le="+Inf"} 3.0
+llmserve_batch_size_count 3.0

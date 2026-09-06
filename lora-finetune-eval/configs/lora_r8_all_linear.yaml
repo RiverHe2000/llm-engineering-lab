@@ -1,0 +1,28 @@
+# LoRA r=8 on *all* linear layers (attention q/k/v/out + FFN), the QLoRA-style choice.
+name: lora_r8_all_linear
+model_name: distilbert/distilbert-base-uncased
+strategy: lora
+lora:
+  r: 8
+  alpha: 16
+  dropout: 0.1
+  target_modules: '\.(q_lin|k_lin|v_lin|out_lin|lin1|lin2)$'
+data:
+  agreement: all          # 2,264 sentences with unanimous annotator agreement
+  val_fraction: 0.15
+  test_fraction: 0.15
+  max_length: 128
+  seed: 42
+train:
+  epochs: 6
+  lr: 5.0e-4
+  batch_size: 32
+  weight_decay: 0.01
+  warmup_ratio: 0.06
+  max_grad_norm: 1.0
+  precision: auto         # bf16 on CUDA, fp32 on CPU
+  seed: 42
+  patience: 2
+  device: auto
+out_dir: runs
+n_boot: 1000

@@ -1,0 +1,103 @@
+{
+  "env": {
+    "model": "distilbert/distilgpt2",
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "torch": "2.11.0+cu128",
+    "python": "3.12.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "gpu": "NVIDIA GeForce RTX 4070"
+  },
+  "rows": [
+    {
+      "batch_size": 1,
+      "prompt_tokens": 9,
+      "new_tokens_per_request": 64,
+      "repeats": 3,
+      "latency": {
+        "mean_ms": 176.51416667892286,
+        "p50_ms": 175.17900001257658,
+        "p95_ms": 184.15388998691924,
+        "min_ms": 169.2124000401236,
+        "max_ms": 185.15109998406842
+      },
+      "tokens_per_second": 362.57713023349123,
+      "ms_per_token_per_request": 2.737171875196509
+    },
+    {
+      "batch_size": 2,
+      "prompt_tokens": 9,
+      "new_tokens_per_request": 64,
+      "repeats": 3,
+      "latency": {
+        "mean_ms": 196.84626666518548,
+        "p50_ms": 195.0271999812685,
+        "p95_ms": 206.0945000150241,
+        "min_ms": 188.18739999551326,
+        "max_ms": 207.32420001877472
+      },
+      "tokens_per_second": 650.2536327890554,
+      "ms_per_token_per_request": 3.0472999997073202
+    },
+    {
+      "batch_size": 4,
+      "prompt_tokens": 9,
+      "new_tokens_per_request": 64,
+      "repeats": 3,
+      "latency": {
+        "mean_ms": 205.85663333379975,
+        "p50_ms": 206.90940000349656,
+        "p95_ms": 216.80481001967564,
+        "min_ms": 192.75619997642934,
+        "max_ms": 217.90430002147332
+      },
+      "tokens_per_second": 1243.5839246670862,
+      "ms_per_token_per_request": 3.2329593750546337
+    },
+    {
+      "batch_size": 8,
+      "prompt_tokens": 9,
+      "new_tokens_per_request": 64,
+      "repeats": 3,
+      "latency": {
+        "mean_ms": 209.14819999597967,
+        "p50_ms": 198.28089996008202,
+        "p95_ms": 230.7597400038503,
+        "min_ms": 194.79520001914352,
+        "max_ms": 234.36850000871345
+      },
+      "tokens_per_second": 2448.024893400191,
+      "ms_per_token_per_request": 3.0981390618762816
+    },
+    {
+      "batch_size": 16,
+      "prompt_tokens": 9,
+      "new_tokens_per_request": 64,
+      "repeats": 3,
+      "latency": {
+        "mean_ms": 265.48983333244297,
+        "p50_ms": 268.58329999959096,
+        "p95_ms": 303.70282998192124,
+        "min_ms": 220.28120001778007,
+        "max_ms": 307.60499997995794
+      },
+      "tokens_per_second": 3857.0215180999426,
+      "ms_per_token_per_request": 4.196614062493609
+    },
+    {
+      "batch_size": 32,
+      "prompt_tokens": 9,
+      "new_tokens_per_request": 64,
+      "repeats": 3,
+      "latency": {
+        "mean_ms": 229.54599999745065,
+        "p50_ms": 230.24280002573505,
+        "p95_ms": 241.72085999161936,
+        "min_ms": 215.3989999787882,
+        "max_ms": 242.99619998782873
+      },
+      "tokens_per_second": 8921.958997424243,
+      "ms_per_token_per_request": 3.59754375040211
+    }
+  ]
+}
