@@ -1,7 +1,7 @@
 # Runs the same quality gates as CI for every project in this repository.
 # Usage: make install | make lint | make type | make test | make all
 #        make PROJECT=transformer-from-scratch test      # one project only
-PROJECTS := transformer-from-scratch lora-finetune-eval llm-inference-server
+PROJECTS := transformer-from-scratch lora-finetune-eval llm-inference-server sft-dpo-alignment
 PROJECT ?= $(PROJECTS)
 PY ?= python
 

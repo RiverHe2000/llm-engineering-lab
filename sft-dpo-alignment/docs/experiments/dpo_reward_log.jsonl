@@ -1,0 +1,17 @@
+{"step": 10, "reward_chosen": 4.670279443264008, "reward_rejected": 4.608491539955139, "reward_margin": 0.06178790330886841, "reward_accuracy": 0.5}
+{"step": 20, "reward_chosen": 6.125292658805847, "reward_rejected": 5.720569729804993, "reward_margin": 0.4047229290008545, "reward_accuracy": 0.75}
+{"step": 30, "reward_chosen": 3.7988792061805725, "reward_rejected": 3.4933354258537292, "reward_margin": 0.30554378032684326, "reward_accuracy": 0.5}
+{"step": 40, "reward_chosen": 4.233849823474884, "reward_rejected": 3.70612895488739, "reward_margin": 0.5277208685874939, "reward_accuracy": 0.75}
+{"step": 50, "reward_chosen": 4.564000844955444, "reward_rejected": 3.5566553473472595, "reward_margin": 1.0073454976081848, "reward_accuracy": 1.0}
+{"step": 60, "reward_chosen": 4.308122754096985, "reward_rejected": 4.6746668219566345, "reward_margin": -0.36654406785964966, "reward_accuracy": 0.75}
+{"step": 70, "reward_chosen": 3.4119500517845154, "reward_rejected": 2.980494499206543, "reward_margin": 0.4314555525779724, "reward_accuracy": 0.75}
+{"step": 80, "reward_chosen": 4.222223937511444, "reward_rejected": 3.4435772597789764, "reward_margin": 0.7786466777324677, "reward_accuracy": 1.0}
+{"step": 90, "reward_chosen": 3.0377346873283386, "reward_rejected": 3.372504323720932, "reward_margin": -0.3347696363925934, "reward_accuracy": 0.5}
+{"step": 100, "reward_chosen": 3.382508873939514, "reward_rejected": 3.091787099838257, "reward_margin": 0.2907217741012573, "reward_accuracy": 0.75}
+{"step": 110, "reward_chosen": 3.3145586252212524, "reward_rejected": 1.1996763199567795, "reward_margin": 2.114882305264473, "reward_accuracy": 0.75}
+{"step": 120, "reward_chosen": 2.595963880419731, "reward_rejected": 0.8833225965499878, "reward_margin": 1.7126412838697433, "reward_accuracy": 1.0}
+{"step": 130, "reward_chosen": 3.460736572742462, "reward_rejected": 2.349499747157097, "reward_margin": 1.1112368255853653, "reward_accuracy": 0.75}
+{"step": 140, "reward_chosen": 4.254762351512909, "reward_rejected": 2.5860270261764526, "reward_margin": 1.6687353253364563, "reward_accuracy": 1.0}
+{"step": 150, "reward_chosen": 3.3062464594841003, "reward_rejected": 2.524806246161461, "reward_margin": 0.7814402133226395, "reward_accuracy": 0.5}
+{"step": 160, "reward_chosen": 4.694019854068756, "reward_rejected": 4.446143448352814, "reward_margin": 0.24787640571594238, "reward_accuracy": 0.75}
+{"step": 168, "reward_chosen": 3.921495199203491, "reward_rejected": 1.4572894324858983, "reward_margin": 2.464205766717593, "reward_accuracy": 1.0}

@@ -1,0 +1,85 @@
+{
+  "content_hash": "7fa21199f5eab0b55eb993065742541a35efed3591959674a5e651f93625042b",
+  "seed": 1,
+  "splits": {
+    "test": {
+      "field_presence": {
+        "flags": 0.95,
+        "objectives": 0.95,
+        "recommendation_amount": 0.8122676579925651,
+        "recommendations": 1.0
+      },
+      "n": 160,
+      "note_words": {
+        "count": 160,
+        "maximum": 669.0,
+        "mean": 206.45625,
+        "minimum": 64.0,
+        "p25": 102.0,
+        "p50": 121.0,
+        "p75": 159.0
+      },
+      "per_slice": {
+        "absent_fields": 27,
+        "clean": 27,
+        "distractor": 27,
+        "long_context": 26,
+        "many_items": 26,
+        "mixed_formats": 27
+      }
+    },
+    "train": {
+      "field_presence": {
+        "flags": 0.9525,
+        "objectives": 0.945,
+        "recommendation_amount": 0.7904278462654097,
+        "recommendations": 1.0
+      },
+      "n": 400,
+      "note_words": {
+        "count": 400,
+        "maximum": 666.0,
+        "mean": 206.9825,
+        "minimum": 64.0,
+        "p25": 101.75,
+        "p50": 124.0,
+        "p75": 158.0
+      },
+      "per_slice": {
+        "absent_fields": 67,
+        "clean": 67,
+        "distractor": 67,
+        "long_context": 66,
+        "many_items": 66,
+        "mixed_formats": 67
+      }
+    },
+    "val": {
+      "field_presence": {
+        "flags": 0.9625,
+        "objectives": 0.9125,
+        "recommendation_amount": 0.8284671532846716,
+        "recommendations": 1.0
+      },
+      "n": 80,
+      "note_words": {
+        "count": 80,
+        "maximum": 663.0,
+        "mean": 207.25,
+        "minimum": 67.0,
+        "p25": 100.5,
+        "p50": 127.5,
+        "p75": 164.25
+      },
+      "per_slice": {
+        "absent_fields": 13,
+        "clean": 14,
+        "distractor": 14,
+        "long_context": 13,
+        "many_items": 13,
+        "mixed_formats": 13
+      }
+    }
+  },
+  "total": 640
+}

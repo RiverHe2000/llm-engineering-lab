@@ -1,0 +1,50 @@
+[
+  {
+    "beta": 0.1,
+    "chosen_reward_difference": 2.7755575615628914e-17,
+    "label_smoothing": 0.0,
+    "loss_difference": 1.1102230246251565e-16,
+    "normalised_loss_difference": null,
+    "note": "",
+    "pairs": 8,
+    "reason": "",
+    "rejected_reward_difference": 2.7755575615628914e-17,
+    "status": "agree",
+    "tolerance": 1e-05,
+    "trl_loss_type": "sigmoid",
+    "trl_version": "1.12.0",
+    "variant": "sigmoid"
+  },
+  {
+    "beta": 0.1,
+    "chosen_reward_difference": 2.7755575615628914e-17,
+    "label_smoothing": 0.0,
+    "loss_difference": 1.0658141036401503e-14,
+    "normalised_loss_difference": 1.0658141036401503e-14,
+    "note": "",
+    "pairs": 8,
+    "reason": "",
+    "rejected_reward_difference": 2.7755575615628914e-17,
+    "status": "agree",
+    "tolerance": 1e-05,
+    "trl_loss_type": "ipo",
+    "trl_version": "1.12.0",
+    "variant": "ipo"
+  },
+  {
+    "beta": 0.1,
+    "chosen_reward_difference": 2.7755575615628914e-17,
+    "label_smoothing": 0.1,
+    "loss_difference": 1.1102230246251565e-16,
+    "normalised_loss_difference": null,
+    "note": "",
+    "pairs": 8,
+    "reason": "",
+    "rejected_reward_difference": 2.7755575615628914e-17,
+    "status": "agree",
+    "tolerance": 1e-05,
+    "trl_loss_type": "aot",
+    "trl_version": "1.12.0",
+    "variant": "cdpo"
+  }
+]

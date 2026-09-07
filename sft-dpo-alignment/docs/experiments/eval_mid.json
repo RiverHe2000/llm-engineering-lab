@@ -1,0 +1,1997 @@
+{
+  "model": "mid-prompted",
+  "overall": {
+    "n": 160,
+    "json_valid_rate": 0.8125,
+    "schema_valid_rate": 0.36875,
+    "mean_field_f1": 0.5543843166830389,
+    "exact_match_rate": 0.0,
+    "mean_reward": 0.5688805900098234
+  },
+  "per_slice": {
+    "clean": {
+      "n": 27,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 0.4074074074074074,
+      "mean_field_f1": 0.6664228155896837,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.6813351708352918
+    },
+    "distractor": {
+      "n": 27,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 0.7037037037037037,
+      "mean_field_f1": 0.7810309556354423,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.8093593141220061
+    },
+    "mixed_formats": {
+      "n": 27,
+      "json_valid_rate": 0.7777777777777778,
+      "schema_valid_rate": 0.2962962962962963,
+      "mean_field_f1": 0.38116954403023895,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.44351654123295814
+    },
+    "absent_fields": {
+      "n": 27,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 0.25925925925925924,
+      "mean_field_f1": 0.5884182863346059,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.6049028236526154
+    },
+    "long_context": {
+      "n": 26,
+      "json_valid_rate": 0.7307692307692307,
+      "schema_valid_rate": 0.3076923076923077,
+      "mean_field_f1": 0.6142867478528481,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.5762643564040165
+    },
+    "many_items": {
+      "n": 26,
+      "json_valid_rate": 0.34615384615384615,
+      "schema_valid_rate": 0.23076923076923078,
+      "mean_field_f1": 0.28730430700703663,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.28776719958883734
+    }
+  },
+  "per_violation": {
+    "unparseable": {
+      "n": 30,
+      "json_valid_rate": 0.0,
+      "schema_valid_rate": 0.0,
+      "mean_field_f1": 0.0,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.0
+    },
+    "missing_field": {
+      "n": 6,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 0.0,
+      "mean_field_f1": 0.8213557791537668,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.69281346749226
+    },
+    "extra_field": {
+      "n": 62,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 0.0,
+      "mean_field_f1": 0.45801979384742053,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.47481187630845234
+    },
+    "bad_enum": {
+      "n": 3,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 0.0,
+      "mean_field_f1": 0.8898873527905785,
+      "exact_match_rate": 0.0,
+      "mean_reward": 0.733932411674347
+    }
+  },
+  "per_field": {
+    "client_name": {
+      "field": "client_name",
+      "expected": 160,
+      "emitted": 130,
+      "correct": 130
+    },
+    "record_date": {
+      "field": "record_date",
+      "expected": 160,
+      "emitted": 130,
+      "correct": 127
+    },
+    "risk_profile": {
+      "field": "risk_profile",
+      "expected": 160,
+      "emitted": 130,
+      "correct": 122
+    },
+    "objectives": {
+      "field": "objectives",
+      "expected": 411,
+      "emitted": 59,
+      "correct": 57
+    },
+    "recommendations": {
+      "field": "recommendations",
+      "expected": 1513,
+      "emitted": 670,
+      "correct": 660
+    },
+    "fees": {
+      "field": "fees",
+      "expected": 320,
+      "emitted": 260,
+      "correct": 226
+    },
+    "review_months": {
+      "field": "review_months",
+      "expected": 160,
+      "emitted": 124,
+      "correct": 124
+    },
+    "flags": {
+      "field": "flags",
+      "expected": 200,
+      "emitted": 3,
+      "correct": 0
+    },
+    "objective_1": {
+      "field": "objective_1",
+      "expected": 0,
+      "emitted": 54,
+      "correct": 0
+    },
+    "objective_2": {
+      "field": "objective_2",
+      "expected": 0,
+      "emitted": 54,
+      "correct": 0
+    },
+    "objective_3": {
+      "field": "objective_3",
+      "expected": 0,
+      "emitted": 29,
+      "correct": 0
+    },
+    "recommendation_1": {
+      "field": "recommendation_1",
+      "expected": 0,
+      "emitted": 52,
+      "correct": 0
+    },
+    "recommendation_2": {
+      "field": "recommendation_2",
+      "expected": 0,
+      "emitted": 52,
+      "correct": 0
+    },
+    "objective_4": {
+      "field": "objective_4",
+      "expected": 0,
+      "emitted": 3,
+      "correct": 0
+    },
+    "recommendation_3": {
+      "field": "recommendation_3",
+      "expected": 0,
+      "emitted": 31,
+      "correct": 0
+    },
+    "objective_achieved": {
+      "field": "objective_achieved",
+      "expected": 0,
+      "emitted": 2,
+      "correct": 0
+    },
+    "flagged_consequences": {
+      "field": "flagged_consequences",
+      "expected": 0,
+      "emitted": 1,
+      "correct": 0
+    },
+    "recommendation_4": {
+      "field": "recommendation_4",
+      "expected": 0,
+      "emitted": 1,
+      "correct": 0
+    },
+    "recommendation_5": {
+      "field": "recommendation_5",
+      "expected": 0,
+      "emitted": 1,
+      "correct": 0
+    },
+    "objective": {
+      "field": "objective",
+      "expected": 0,
+      "emitted": 5,
+      "correct": 0
+    },
+    "summary_of_next_steps": {
+      "field": "summary_of_next_steps",
+      "expected": 0,
+      "emitted": 1,
+      "correct": 0
+    },
+    "objective_5": {
+      "field": "objective_5",
+      "expected": 0,
+      "emitted": 1,
+      "correct": 0
+    }
+  },
+  "parse_gap": {
+    "n": 160,
+    "strict_rate": 0.8125,
+    "lenient_rate": 0.90625,
+    "repaired": 15
+  },
+  "outcomes": [
+    {
+      "example_id": "test-clean-0000",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4444444444444444,
+      "exact_match": false,
+      "reward": 0.4666666666666667,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0001",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9714285714285714,
+      "exact_match": false,
+      "reward": 0.9828571428571429,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0002",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9655172413793104,
+      "exact_match": false,
+      "reward": 0.9793103448275863,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0003",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.46153846153846156,
+      "exact_match": false,
+      "reward": 0.47692307692307695,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0004",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9696969696969697,
+      "exact_match": false,
+      "reward": 0.9818181818181818,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0005",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.42857142857142855,
+      "exact_match": false,
+      "reward": 0.45714285714285713,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0006",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3225806451612903,
+      "exact_match": false,
+      "reward": 0.3935483870967742,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0007",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.972972972972973,
+      "exact_match": false,
+      "reward": 0.9837837837837838,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0008",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9655172413793104,
+      "exact_match": false,
+      "reward": 0.9793103448275863,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0009",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.48,
+      "exact_match": false,
+      "reward": 0.488,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0010",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8275862068965517,
+      "exact_match": false,
+      "reward": 0.6965517241379311,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0011",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9714285714285714,
+      "exact_match": false,
+      "reward": 0.9828571428571429,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0012",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.967741935483871,
+      "exact_match": false,
+      "reward": 0.9806451612903226,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0013",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8888888888888888,
+      "exact_match": false,
+      "reward": 0.9333333333333333,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0014",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.46153846153846156,
+      "exact_match": false,
+      "reward": 0.47692307692307695,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0015",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9655172413793104,
+      "exact_match": false,
+      "reward": 0.9793103448275863,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0016",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.41379310344827586,
+      "exact_match": false,
+      "reward": 0.4482758620689655,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0017",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.5,
+      "exact_match": false,
+      "reward": 0.5,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0018",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3870967741935484,
+      "exact_match": false,
+      "reward": 0.432258064516129,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0019",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.967741935483871,
+      "exact_match": false,
+      "reward": 0.9806451612903226,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0020",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.5217391304347826,
+      "exact_match": false,
+      "reward": 0.5130434782608695,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0021",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.5,
+      "exact_match": false,
+      "reward": 0.5,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0022",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3870967741935484,
+      "exact_match": false,
+      "reward": 0.432258064516129,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0023",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9696969696969697,
+      "exact_match": false,
+      "reward": 0.9818181818181818,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-clean-0024",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.48,
+      "exact_match": false,
+      "reward": 0.488,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0025",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.38461538461538464,
+      "exact_match": false,
+      "reward": 0.4307692307692308,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-clean-0026",
+      "slice": "clean",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4166666666666667,
+      "exact_match": false,
+      "reward": 0.45,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0000",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8571428571428571,
+      "exact_match": false,
+      "reward": 0.9142857142857143,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0001",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8888888888888888,
+      "exact_match": false,
+      "reward": 0.9333333333333333,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0002",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4444444444444444,
+      "exact_match": false,
+      "reward": 0.4666666666666667,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0003",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8387096774193549,
+      "exact_match": false,
+      "reward": 0.9032258064516129,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0004",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9655172413793104,
+      "exact_match": false,
+      "reward": 0.9793103448275863,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0005",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3870967741935484,
+      "exact_match": false,
+      "reward": 0.432258064516129,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0006",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.7857142857142857,
+      "exact_match": false,
+      "reward": 0.8714285714285714,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0007",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.896551724137931,
+      "exact_match": false,
+      "reward": 0.9379310344827586,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0008",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.88,
+      "exact_match": false,
+      "reward": 0.928,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0009",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.46153846153846156,
+      "exact_match": false,
+      "reward": 0.47692307692307695,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0010",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8823529411764706,
+      "exact_match": false,
+      "reward": 0.9294117647058824,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0011",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.875,
+      "exact_match": false,
+      "reward": 0.925,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0012",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4,
+      "exact_match": false,
+      "reward": 0.44,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0013",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.967741935483871,
+      "exact_match": false,
+      "reward": 0.9806451612903226,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0014",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.875,
+      "exact_match": false,
+      "reward": 0.925,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0015",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4444444444444444,
+      "exact_match": false,
+      "reward": 0.4666666666666667,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0016",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.42857142857142855,
+      "exact_match": false,
+      "reward": 0.45714285714285713,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0017",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.7407407407407407,
+      "exact_match": false,
+      "reward": 0.6444444444444444,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-distractor-0018",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8571428571428571,
+      "exact_match": false,
+      "reward": 0.9142857142857143,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0019",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8387096774193549,
+      "exact_match": false,
+      "reward": 0.7032258064516128,
+      "lenient_json_valid": true,
+      "violation": "bad_enum"
+    },
+    {
+      "example_id": "test-distractor-0020",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8571428571428571,
+      "exact_match": false,
+      "reward": 0.9142857142857143,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0021",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8823529411764706,
+      "exact_match": false,
+      "reward": 0.9294117647058824,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0022",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.967741935483871,
+      "exact_match": false,
+      "reward": 0.9806451612903226,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0023",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.88,
+      "exact_match": false,
+      "reward": 0.928,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0024",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9090909090909091,
+      "exact_match": false,
+      "reward": 0.9454545454545454,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0025",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.972972972972973,
+      "exact_match": false,
+      "reward": 0.9837837837837838,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-distractor-0026",
+      "slice": "distractor",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9032258064516129,
+      "exact_match": false,
+      "reward": 0.9419354838709677,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0000",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.25806451612903225,
+      "exact_match": false,
+      "reward": 0.3548387096774194,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0001",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.20689655172413793,
+      "exact_match": false,
+      "reward": 0.32413793103448274,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0002",
+      "slice": "mixed_formats",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-mixed_formats-0003",
+      "slice": "mixed_formats",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-mixed_formats-0004",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.25806451612903225,
+      "exact_match": false,
+      "reward": 0.3548387096774194,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0005",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.7647058823529411,
+      "exact_match": false,
+      "reward": 0.8588235294117647,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0006",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.7647058823529411,
+      "exact_match": false,
+      "reward": 0.8588235294117647,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0007",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.7878787878787878,
+      "exact_match": false,
+      "reward": 0.8727272727272727,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0008",
+      "slice": "mixed_formats",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-mixed_formats-0009",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3225806451612903,
+      "exact_match": false,
+      "reward": 0.3935483870967742,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0010",
+      "slice": "mixed_formats",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-mixed_formats-0011",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8484848484848485,
+      "exact_match": false,
+      "reward": 0.9090909090909091,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0012",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.7272727272727273,
+      "exact_match": false,
+      "reward": 0.8363636363636364,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0013",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3448275862068966,
+      "exact_match": false,
+      "reward": 0.40689655172413797,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0014",
+      "slice": "mixed_formats",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-mixed_formats-0015",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3225806451612903,
+      "exact_match": false,
+      "reward": 0.3935483870967742,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0016",
+      "slice": "mixed_formats",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-mixed_formats-0017",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3448275862068966,
+      "exact_match": false,
+      "reward": 0.40689655172413797,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0018",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8235294117647058,
+      "exact_match": false,
+      "reward": 0.8941176470588235,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0019",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3333333333333333,
+      "exact_match": false,
+      "reward": 0.4,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0020",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3225806451612903,
+      "exact_match": false,
+      "reward": 0.3935483870967742,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0021",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3225806451612903,
+      "exact_match": false,
+      "reward": 0.3935483870967742,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0022",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3448275862068966,
+      "exact_match": false,
+      "reward": 0.40689655172413797,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0023",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.7647058823529411,
+      "exact_match": false,
+      "reward": 0.8588235294117647,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0024",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8484848484848485,
+      "exact_match": false,
+      "reward": 0.9090909090909091,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-mixed_formats-0025",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.25806451612903225,
+      "exact_match": false,
+      "reward": 0.3548387096774194,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-mixed_formats-0026",
+      "slice": "mixed_formats",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.3225806451612903,
+      "exact_match": false,
+      "reward": 0.3935483870967742,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0000",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4,
+      "exact_match": false,
+      "reward": 0.44,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0001",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.35714285714285715,
+      "exact_match": false,
+      "reward": 0.41428571428571426,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0002",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4444444444444444,
+      "exact_match": false,
+      "reward": 0.4666666666666667,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0003",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9375,
+      "exact_match": false,
+      "reward": 0.9625,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0004",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4,
+      "exact_match": false,
+      "reward": 0.44,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0005",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4444444444444444,
+      "exact_match": false,
+      "reward": 0.4666666666666667,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0006",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9375,
+      "exact_match": false,
+      "reward": 0.9625,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0007",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.48,
+      "exact_match": false,
+      "reward": 0.488,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0008",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.96,
+      "exact_match": false,
+      "reward": 0.976,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0009",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4,
+      "exact_match": false,
+      "reward": 0.44,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0010",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.42857142857142855,
+      "exact_match": false,
+      "reward": 0.45714285714285713,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0011",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.5,
+      "exact_match": false,
+      "reward": 0.5,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0012",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8888888888888888,
+      "exact_match": false,
+      "reward": 0.9333333333333333,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0013",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.96,
+      "exact_match": false,
+      "reward": 0.976,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0014",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.42857142857142855,
+      "exact_match": false,
+      "reward": 0.45714285714285713,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0015",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.42857142857142855,
+      "exact_match": false,
+      "reward": 0.45714285714285713,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0016",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8275862068965517,
+      "exact_match": false,
+      "reward": 0.6965517241379311,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0017",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.38461538461538464,
+      "exact_match": false,
+      "reward": 0.4307692307692308,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0018",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9655172413793104,
+      "exact_match": false,
+      "reward": 0.9793103448275863,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0019",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.41379310344827586,
+      "exact_match": false,
+      "reward": 0.4482758620689655,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0020",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.9142857142857143,
+      "exact_match": false,
+      "reward": 0.7485714285714284,
+      "lenient_json_valid": true,
+      "violation": "bad_enum"
+    },
+    {
+      "example_id": "test-absent_fields-0021",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.37037037037037035,
+      "exact_match": false,
+      "reward": 0.4222222222222222,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0022",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.38461538461538464,
+      "exact_match": false,
+      "reward": 0.4307692307692308,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0023",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.43478260869565216,
+      "exact_match": false,
+      "reward": 0.4608695652173913,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0024",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.42857142857142855,
+      "exact_match": false,
+      "reward": 0.45714285714285713,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-absent_fields-0025",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9230769230769231,
+      "exact_match": false,
+      "reward": 0.9538461538461539,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-absent_fields-0026",
+      "slice": "absent_fields",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.4444444444444444,
+      "exact_match": false,
+      "reward": 0.4666666666666667,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-long_context-0000",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8780487804878049,
+      "exact_match": false,
+      "reward": 0.926829268292683,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0001",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8235294117647058,
+      "exact_match": false,
+      "reward": 0.6941176470588235,
+      "lenient_json_valid": true,
+      "violation": "missing_field"
+    },
+    {
+      "example_id": "test-long_context-0002",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8484848484848485,
+      "exact_match": false,
+      "reward": 0.9090909090909091,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0003",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8780487804878049,
+      "exact_match": false,
+      "reward": 0.926829268292683,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0004",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8484848484848485,
+      "exact_match": false,
+      "reward": 0.9090909090909091,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0005",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-long_context-0006",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8484848484848485,
+      "exact_match": false,
+      "reward": 0.9090909090909091,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0007",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8571428571428571,
+      "exact_match": false,
+      "reward": 0.7142857142857142,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-long_context-0008",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8333333333333334,
+      "exact_match": false,
+      "reward": 0.7,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-long_context-0009",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8205128205128205,
+      "exact_match": false,
+      "reward": 0.8923076923076922,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0010",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-long_context-0011",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8648648648648649,
+      "exact_match": false,
+      "reward": 0.918918918918919,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0012",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8333333333333334,
+      "exact_match": false,
+      "reward": 0.7,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-long_context-0013",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8,
+      "exact_match": false,
+      "reward": 0.6799999999999999,
+      "lenient_json_valid": true,
+      "violation": "missing_field"
+    },
+    {
+      "example_id": "test-long_context-0014",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-long_context-0015",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8421052631578947,
+      "exact_match": false,
+      "reward": 0.7052631578947368,
+      "lenient_json_valid": true,
+      "violation": "missing_field"
+    },
+    {
+      "example_id": "test-long_context-0016",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8,
+      "exact_match": false,
+      "reward": 0.6799999999999999,
+      "lenient_json_valid": true,
+      "violation": "missing_field"
+    },
+    {
+      "example_id": "test-long_context-0017",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8571428571428571,
+      "exact_match": false,
+      "reward": 0.9142857142857143,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-long_context-0018",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-long_context-0019",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8125,
+      "exact_match": false,
+      "reward": 0.6875,
+      "lenient_json_valid": true,
+      "violation": "missing_field"
+    },
+    {
+      "example_id": "test-long_context-0020",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-long_context-0021",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-long_context-0022",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.85,
+      "exact_match": false,
+      "reward": 0.71,
+      "lenient_json_valid": true,
+      "violation": "missing_field"
+    },
+    {
+      "example_id": "test-long_context-0023",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8333333333333334,
+      "exact_match": false,
+      "reward": 0.7,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-long_context-0024",
+      "slice": "long_context",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8421052631578947,
+      "exact_match": false,
+      "reward": 0.7052631578947368,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-long_context-0025",
+      "slice": "long_context",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0000",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0001",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0002",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0003",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9090909090909091,
+      "exact_match": false,
+      "reward": 0.9454545454545454,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-many_items-0004",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0005",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0006",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0007",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0008",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8837209302325582,
+      "exact_match": false,
+      "reward": 0.9302325581395349,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-many_items-0009",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0010",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0011",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.8301886792452831,
+      "exact_match": false,
+      "reward": 0.8981132075471698,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-many_items-0012",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0013",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0014",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0015",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9056603773584906,
+      "exact_match": false,
+      "reward": 0.9433962264150944,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-many_items-0016",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.30303030303030304,
+      "exact_match": false,
+      "reward": 0.38181818181818183,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-many_items-0017",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.8085106382978723,
+      "exact_match": false,
+      "reward": 0.6851063829787234,
+      "lenient_json_valid": true,
+      "violation": "extra_field"
+    },
+    {
+      "example_id": "test-many_items-0018",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9565217391304348,
+      "exact_match": false,
+      "reward": 0.9739130434782609,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-many_items-0019",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0020",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0021",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": false,
+      "field_f1": 0.9166666666666666,
+      "exact_match": false,
+      "reward": 0.75,
+      "lenient_json_valid": true,
+      "violation": "bad_enum"
+    },
+    {
+      "example_id": "test-many_items-0022",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0023",
+      "slice": "many_items",
+      "json_valid": true,
+      "schema_valid": true,
+      "field_f1": 0.9565217391304348,
+      "exact_match": false,
+      "reward": 0.9739130434782609,
+      "lenient_json_valid": true,
+      "violation": null
+    },
+    {
+      "example_id": "test-many_items-0024",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": false,
+      "violation": "unparseable"
+    },
+    {
+      "example_id": "test-many_items-0025",
+      "slice": "many_items",
+      "json_valid": false,
+      "schema_valid": false,
+      "field_f1": 0.0,
+      "exact_match": false,
+      "reward": 0.0,
+      "lenient_json_valid": true,
+      "violation": "unparseable"
+    }
+  ]
+}

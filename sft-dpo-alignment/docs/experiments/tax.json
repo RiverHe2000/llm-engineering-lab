@@ -1,0 +1,25 @@
+{
+  "after_model": "Qwen/Qwen2.5-0.5B-Instruct+aligned",
+  "after_rate": 0.4166666666666667,
+  "before_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "before_rate": 0.5833333333333334,
+  "delta": {
+    "confidence": 0.95,
+    "high": 0.0,
+    "low": -0.4166666666666667,
+    "point": -0.16666666666666666
+  },
+  "mcnemar_b": 2,
+  "mcnemar_c": 0,
+  "mcnemar_p": 0.5,
+  "n": 12,
+  "verdict": {
+    "interval": {
+      "confidence": 0.95,
+      "high": 0.0,
+      "low": -0.4166666666666667,
+      "point": -0.16666666666666666
+    },
+    "margin": 0.05
+  }
+}

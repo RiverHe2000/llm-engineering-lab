@@ -1,0 +1,45 @@
+{
+  "steps": 300,
+  "supervised_tokens": 227844,
+  "final_train_loss": 0.000556203827727586,
+  "loss_reduction": 829.1090486126903,
+  "best_val_loss": 0.0008310901159238734,
+  "best_step": 300,
+  "val_curve": [
+    {
+      "step": 50,
+      "loss": 0.008711877042546147
+    },
+    {
+      "step": 100,
+      "loss": 0.00232697144166389
+    },
+    {
+      "step": 150,
+      "loss": 0.0014074738555045732
+    },
+    {
+      "step": 200,
+      "loss": 0.0015561215360914453
+    },
+    {
+      "step": 250,
+      "loss": 0.0008384050359140932
+    },
+    {
+      "step": 300,
+      "loss": 0.0008310901159238734
+    }
+  ],
+  "diverged": false,
+  "trainable_parameters": 4399104,
+  "trainable_pct": 0.8825888244963597,
+  "data_content_hash": "7fa21199f5eab0b55eb993065742541a35efed3591959674a5e651f93625042b",
+  "adapter_path": "runs\\main\\sft\\best",
+  "collation": {
+    "seen": 1680,
+    "truncated": 0,
+    "dropped": 0,
+    "drop_rate": 0.0
+  }
+}

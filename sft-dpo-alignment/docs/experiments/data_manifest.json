@@ -1,0 +1,10 @@
+{
+  "content_hash": "7fa21199f5eab0b55eb993065742541a35efed3591959674a5e651f93625042b",
+  "counts": {
+    "test": 160,
+    "train": 400,
+    "val": 80
+  },
+  "format": "sftdpo-dataset-v1",
+  "seed": 1
+}

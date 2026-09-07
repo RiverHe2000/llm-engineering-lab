@@ -1,0 +1,5 @@
+sigmoid vs trl 1.12.0 'sigmoid' on 8 pairs: agree, max difference 1.110e-16
+ipo vs trl 1.12.0 'ipo' on 8 pairs: agree, max difference 1.066e-14
+cdpo vs trl 1.12.0 'aot' on 8 pairs: agree, max difference 1.110e-16
+
+maximum absolute difference: 1.066e-14 (tolerance 1.0e-05)

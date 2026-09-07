@@ -1,0 +1,65 @@
+{
+  "flat_prompts": 16,
+  "gold_fallback_used": false,
+  "identical_text_rejections": 0,
+  "mean_margin": 0.38386194310904875,
+  "min_margin": 0.015,
+  "no_pair_prompts": 6,
+  "pairs": 671,
+  "pairs_dropped_by_cap": 0,
+  "pairs_per_prompt": 1.6775,
+  "pairs_written": 671,
+  "prompt_yield": 0.9425,
+  "prompts": 400,
+  "prompts_with_pairs": 377,
+  "rejected_violations": {
+    "bad_enum": 4,
+    "extra_field": 144,
+    "missing_field": 142,
+    "out_of_range": 28,
+    "unparseable": 145,
+    "wrong_type": 81
+  },
+  "rejected_without_violation": 127,
+  "saturated_prompts": 1,
+  "saturation_rate": 0.0025,
+  "single_sample_prompts": 0,
+  "slices": {
+    "absent_fields": {
+      "mean_margin": 0.36584637922978724,
+      "pairs": 104,
+      "prompts": 67,
+      "prompts_with_pairs": 62
+    },
+    "clean": {
+      "mean_margin": 0.37237324495241597,
+      "pairs": 117,
+      "prompts": 67,
+      "prompts_with_pairs": 65
+    },
+    "distractor": {
+      "mean_margin": 0.36312368361279473,
+      "pairs": 118,
+      "prompts": 67,
+      "prompts_with_pairs": 66
+    },
+    "long_context": {
+      "mean_margin": 0.38497076014472265,
+      "pairs": 106,
+      "prompts": 66,
+      "prompts_with_pairs": 59
+    },
+    "many_items": {
+      "mean_margin": 0.48364541228394875,
+      "pairs": 105,
+      "prompts": 66,
+      "prompts_with_pairs": 59
+    },
+    "mixed_formats": {
+      "mean_margin": 0.343119067730382,
+      "pairs": 121,
+      "prompts": 67,
+      "prompts_with_pairs": 66
+    }
+  }
+}

@@ -1,0 +1,74 @@
+name: CI · sft-dpo-alignment
+
+on:
+  push:
+    branches: [main]
+    paths: ["sft-dpo-alignment/**", ".github/workflows/sft-dpo-alignment-ci.yml"]
+  pull_request:
+    paths: ["sft-dpo-alignment/**", ".github/workflows/sft-dpo-alignment-ci.yml"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: sft-dpo-alignment
+
+jobs:
+  quality:
+    name: py${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    env:
+      HF_HUB_OFFLINE: "1"          # tests must never download weights
+      TRANSFORMERS_OFFLINE: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      OMP_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: sft-dpo-alignment/pyproject.toml
+
+      - name: Install CPU-only PyTorch
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Install project (dev + crosscheck extras)
+        run: pip install -e ".[dev,crosscheck]"
+
+      - name: Lint (ruff)
+        run: |
+          ruff check .
+          ruff format --check .
+
+      - name: Type-check (mypy --strict)
+        run: mypy
+
+      - name: Test (pytest + coverage)
+        run: pytest --cov-report=xml
+
+      - name: DPO cross-check against the official TRL implementation
+        # My DPO loss is written from the paper. This compares it against TRL's on
+        # identical inputs and fails the build if they disagree beyond tolerance.
+        run: sftdpo crosscheck --tolerance 1e-5
+
+      - name: Pipeline smoke test (9.8 M-parameter model, CPU)
+        # Data -> SFT -> sampling -> preference mining -> DPO -> evaluation -> comparison,
+        # end to end on a randomly initialised two-layer model. It proves the pipeline is
+        # wired together; the real results come from the GPU runs in docs/RESULTS.md.
+        run: sftdpo pipeline smoke --out runs/ci-smoke
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-py${{ matrix.python-version }}
+          path: sft-dpo-alignment/coverage.xml
+          if-no-files-found: ignore

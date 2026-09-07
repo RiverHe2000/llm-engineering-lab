@@ -1,0 +1,35 @@
+{
+  "stage": "sft",
+  "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+  "data_content_hash": "7fa21199f5eab0b55eb993065742541a35efed3591959674a5e651f93625042b",
+  "trainable_parameters": 4399104,
+  "total_parameters": 498431872,
+  "config": {
+    "learning_rate": 0.0001,
+    "batch_size": 4,
+    "gradient_accumulation_steps": 1,
+    "epochs": 3,
+    "max_steps": null,
+    "warmup_ratio": 0.03,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_epsilon": 1e-8,
+    "bf16": false,
+    "seed": 1,
+    "eval_every_steps": 50,
+    "log_every_steps": 10,
+    "max_seq_length": 2048,
+    "save_best_adapter": true,
+    "output_dir": "runs\\main\\sft"
+  },
+  "library_versions": {
+    "python": "3.12.0",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "peft": "0.20.0",
+    "numpy": "2.5.2",
+    "pydantic": "2.13.5"
+  }
+}

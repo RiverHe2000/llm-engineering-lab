@@ -1,0 +1,24 @@
+{
+  "stage": "dpo",
+  "beta": 0.1,
+  "variant": "sigmoid",
+  "steps": 168,
+  "pairs_seen": 671,
+  "supervised_tokens": 219852,
+  "final_loss": 0.16073109830419222,
+  "initial_reward_accuracy": 0.5,
+  "final_reward_accuracy": 1.0,
+  "reward_accuracy_gain": 0.5,
+  "reward_margin_slope": 0.008861937942970513,
+  "diverged": false,
+  "trainable_parameters": 4399104,
+  "trainable_pct": 0.8825888244963597,
+  "data_content_hash": "2f728de9837ee7b81dad76b49f99709371080130db780af9cbcf64c2a6588c25",
+  "adapter_path": "runs\\main\\dpo\\final",
+  "collation": {
+    "seen": 671,
+    "truncated": 4,
+    "dropped": 0,
+    "drop_rate": 0.0
+  }
+}

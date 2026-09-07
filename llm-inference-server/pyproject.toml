@@ -9,7 +9,7 @@ description = "Production-style LLM inference service: KV-cached batched generat
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
-authors = [{ name = "River He" }]
+authors = [{ name = "Chuan He" }]
 dependencies = [
   "torch>=2.4",
   "transformers>=4.45",
