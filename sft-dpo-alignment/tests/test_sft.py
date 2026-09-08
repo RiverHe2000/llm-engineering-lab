@@ -1145,20 +1145,33 @@ def test_a_trainable_parameter_the_forward_pass_never_uses_is_tolerated(
 
 
 def test_a_worse_validation_score_does_not_replace_the_best(
-    tokenizer: TinyTokenizer, tmp_path: Path
+    tokenizer: TinyTokenizer, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Best-checkpoint tracking has to survive a run that starts overfitting."""
+    """Best-checkpoint tracking has to survive a run that starts overfitting.
+
+    The validation curve is scripted rather than trained, because the property under test
+    is what the tracker does when a later score is *worse*, and a real eight-step run on a
+    randomly initialised tiny model does not reliably produce one: an earlier version of this
+    test leaned on a large learning rate to provoke it, passed on one machine and failed in CI
+    on both Python versions, where the curve happened to fall monotonically and the best step
+    was the last one. A premise the test cannot guarantee is not a premise, it is a hope.
+    """
+    scripted = [0.9, 0.4, 0.6, 0.5, 0.7, 0.8, 0.55, 0.65]
+    served = iter(scripted)
+    monkeypatch.setattr("sftdpo.train.sft.evaluate_loss", lambda *_args, **_kw: next(served))
+
     result = train_sft(
         tiny_model(),
         tokenizer,
         make_features(4),
         make_features(2, prompt_len=3, completion_len=6),
-        make_config(tmp_path, max_steps=8, batch_size=4, eval_every_steps=1, learning_rate=1e-1),
+        make_config(tmp_path, max_steps=8, batch_size=4, eval_every_steps=1),
     )
     losses = [point.loss for point in result.val_curve]
-    assert len(losses) == 8
-    assert result.best_val_loss == pytest.approx(min(losses))
-    assert result.best_step is not None
+    assert losses == scripted
+    # The minimum came at step 2 and six worse scores followed it, one of them close.
+    assert result.best_val_loss == pytest.approx(0.4)
+    assert result.best_step == 2
     assert result.best_step < result.steps
 
 
