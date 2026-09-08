@@ -931,3 +931,30 @@ def test_pipeline_run_reports_a_missing_upstream_stage(
     )
     assert code == 1
     assert "run the 'data' stage" in capsys.readouterr().err
+
+
+# --------------------------------------------------------------------------------------
+# The two trainers must not share their defaults
+# --------------------------------------------------------------------------------------
+
+
+def test_dpo_train_defaults_to_the_preference_stage_settings() -> None:
+    """`sftdpo dpo train` with no flags must not reproduce the run that collapsed.
+
+    The standalone command used to inherit the supervised trainer's 1e-4 and batch of four,
+    which is the configuration that destroyed the model. The pipeline kept the two apart; the
+    per-stage command has to as well.
+    """
+    args = build_parser().parse_args(
+        ["dpo", "train", "--model", "m", "--pairs", "p.jsonl", "--out", "o"]
+    )
+    assert args.lr == 1e-5
+    assert args.batch_size == 1
+    assert args.grad_accum == 4
+
+
+def test_sft_train_keeps_the_supervised_defaults() -> None:
+    args = build_parser().parse_args(["sft", "train", "--model", "m", "--data", "d", "--out", "o"])
+    assert args.lr == 1e-4
+    assert args.batch_size == 4
+    assert args.grad_accum == 1

@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
-# Regenerates everything docs/RESULTS.md cites.
+# Regenerates everything docs/RESULTS.md cites, with the configuration that produced it.
 #
 # The question this experiment answers: a 0.5 B instruct model cannot reliably emit one JSON
 # object that satisfies a fixed schema. Does training fix what prompting could not, and how
 # does the trained small model compare with a much larger model that was only prompted?
 #
-# Needs a CUDA device. Budget roughly three hours on one RTX 4070. Every stage writes to the
-# run directory and is skipped if its output already exists, so an interrupted run resumes.
+# The whole experiment is one `sftdpo pipeline run` -- data, baseline, SFT, mining, DPO, the
+# gates and the report -- followed by the two prompted larger models, the gates against them,
+# and the alignment tax. Every stage writes to the run directory and is skipped if its
+# artefacts already exist, so an interrupted run resumes.
+#
+# The flags below ARE the documented run: they are checked against
+# docs/experiments/run_config.json by tests/test_scripts.py, so this file cannot drift from
+# the numbers it claims to reproduce. An earlier draft carried different split sizes and
+# left the preference-stage learning rate at the supervised default -- which is exactly the
+# configuration that destroyed the model in section 4 of the results. A reproduction script
+# that reproduces the failure rather than the result is worse than none.
+#
+# Needs a CUDA device. Budget roughly two hours on one RTX 4070 for the pipeline and another
+# forty minutes for the comparisons.
 #
 # Usage:  bash scripts/run_experiments.sh [--quick]
 set -euo pipefail
@@ -15,93 +27,69 @@ cd "$(dirname "$0")/.."
 RUN=${SFTDPO_RUN_DIR:-runs/main}
 OUT=docs/experiments
 mkdir -p "$RUN" "$OUT"
-export HF_HUB_OFFLINE=1
 export TOKENIZERS_PARALLELISM=false
+# Deliberately no HF_HUB_OFFLINE here: on a machine that has not seen these checkpoints the
+# first run has to be allowed to download them. Set it yourself once they are cached.
 
 SMALL=${SFTDPO_SMALL_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
-MID=${SFTDPO_MID_MODEL:-Qwen/Qwen2.5-1.5B-Instruct}
-# A hub id, not a local path: this script has to run on a machine that is not mine.
-# Point $SFTDPO_BIG_MODEL at a local directory to use one that is already downloaded.
-BIG=${SFTDPO_BIG_MODEL:-Qwen/Qwen3-4B-Instruct-2507}
+PY=${PYTHON:-python}
 
-N_TRAIN=600; N_VAL=120; N_TEST=200; SFT_EPOCHS=3; SAMPLE_K=6; DPO_EPOCHS=2
+QUICK=""
 if [ "${1:-}" = "--quick" ]; then
-  N_TRAIN=120; N_VAL=40; N_TEST=60; SFT_EPOCHS=1; SAMPLE_K=4; DPO_EPOCHS=1
+  # A smoke-sized run on real weights. Placed after the documented flags so it overrides them.
+  QUICK="--n-train 120 --n-val 40 --n-test 60 --sft-epochs 1 --k 4"
 fi
 
-echo "== 1. Data"
-sftdpo data build --seed 1 --n-train "$N_TRAIN" --n-val "$N_VAL" --n-test "$N_TEST" \
-  --out "$RUN/data"
-sftdpo data stats "$RUN/data" | tee "$OUT/data_stats.txt"
+echo "== 1. The pipeline: data, baseline, SFT, mining, DPO, gates, report"
+# shellcheck disable=SC2086
+"$PY" -m sftdpo pipeline run --out "$RUN" --model "$SMALL" --seed 1 \
+  --n-train 400 --n-val 80 --n-test 160 \
+  --sft-epochs 3 --k 5 --temperature 0.9 \
+  --dpo-epochs 1 --dpo-lr 1e-5 --dpo-batch-size 1 --dpo-grad-accum 4 \
+  --beta 0.1 --variant sigmoid $QUICK
 
 echo
-echo "== 2. Baseline: the untrained 0.5B, prompted"
-sftdpo eval run --model "$SMALL" --data "$RUN/data" --split test --out "$RUN/eval_base.json"
-
-echo
-echo "== 3. Supervised fine-tuning (LoRA)"
-sftdpo sft train --model "$SMALL" --data "$RUN/data" --epochs "$SFT_EPOCHS" \
-  --out "$RUN/sft"
-sftdpo eval run --model "$SMALL" --adapter "$RUN/sft/adapter" --data "$RUN/data" \
-  --split test --out "$RUN/eval_sft.json"
-
-echo
-echo "== 4. Preference mining: the SFT model samples, the verifier labels"
-sftdpo prefs mine --model "$SMALL" --adapter "$RUN/sft/adapter" --data "$RUN/data" \
-  --split train --k "$SAMPLE_K" --out "$RUN/pairs.jsonl" | tee "$OUT/mining_stats.txt"
-
-echo
-echo "== 5. Direct Preference Optimisation"
-sftdpo dpo train --model "$SMALL" --adapter "$RUN/sft/adapter" --pairs "$RUN/pairs.jsonl" \
-  --epochs "$DPO_EPOCHS" --beta 0.1 --variant sigmoid --out "$RUN/dpo"
-sftdpo eval run --model "$SMALL" --adapter "$RUN/dpo/adapter" --data "$RUN/data" \
-  --split test --out "$RUN/eval_dpo.json"
-
-echo
-echo "== 6. The comparison that matters: a prompted model four to eight times the size"
-sftdpo eval run --model "$MID" --data "$RUN/data" --split test --out "$RUN/eval_mid.json"
-sftdpo eval run --model "$BIG" --data "$RUN/data" --split test --out "$RUN/eval_big.json"
-
-echo
-echo "== 7. Gates and comparisons"
-sftdpo eval compare "$RUN/eval_base.json" "$RUN/eval_sft.json" \
+echo "== 2. The three gates, at the margin and floor the results report"
+# The pipeline's own compare stage runs at margin 0 and no floor; the committed gates use a
+# 2-point non-inferiority margin and a 0.95 JSON-validity floor, so they are re-run here.
+"$PY" -m sftdpo eval compare "$RUN/eval_base.json" "$RUN/eval_sft.json" \
   --margin 0.02 --json-floor 0.95 | tee "$OUT/compare_base_sft.md"
-sftdpo eval compare "$RUN/eval_sft.json"  "$RUN/eval_dpo.json" \
+"$PY" -m sftdpo eval compare "$RUN/eval_sft.json"  "$RUN/eval_dpo.json" \
   --margin 0.02 --json-floor 0.95 | tee "$OUT/compare_sft_dpo.md"
-sftdpo eval compare "$RUN/eval_big.json"  "$RUN/eval_dpo.json" \
-  --margin 0.02 --json-floor 0.95 | tee "$OUT/compare_big_dpo.md"
+"$PY" -m sftdpo eval compare "$RUN/eval_base.json" "$RUN/eval_dpo.json" \
+  --margin 0.02 --json-floor 0.95 | tee "$OUT/compare_base_dpo.md"
 
 echo
-echo "== 8. What alignment cost: general instruction-following before and after"
-sftdpo eval tax --model "$SMALL" --adapter "$RUN/dpo/adapter" \
-  --baseline-adapter none --out "$RUN/tax.json" | tee "$OUT/alignment_tax.md"
+echo "== 3. Prompted larger models, their gates, and the alignment tax"
+bash scripts/run_comparisons.sh "$RUN"
 
 echo
-echo "== 9. My DPO loss against the official TRL implementation"
-sftdpo crosscheck --tolerance 1e-5 | tee "$OUT/crosscheck.txt"
+echo "== 4. My DPO loss against the official TRL implementation"
+"$PY" -m sftdpo crosscheck --tolerance 1e-5 | tee "$OUT/crosscheck.txt"
+"$PY" -m sftdpo crosscheck --tolerance 1e-5 --json > "$OUT/crosscheck.json"
 
 echo
-echo "== 10. Full report"
-sftdpo report "$RUN" | tee "$OUT/report.md"
+echo "== 5. Which field the preference stage stopped producing"
+"$PY" scripts/field_coverage_probe.py --run "$RUN" --field flags --out "$OUT/flags_hedge.json"
 
 echo
-echo "== 11. Copy the evidence out of the run directory"
+echo "== 6. Copy the evidence out of the run directory"
 # `runs/` is git-ignored: it holds adapters and sampled completions, which are hundreds of
 # megabytes and regenerable. The evaluation reports and manifests are neither, and every
 # number in docs/RESULTS.md is read off them, so they are copied where they can be committed.
-for name in base sft dpo mid big; do
-  [ -f "$RUN/eval_$name.json" ] && cp "$RUN/eval_$name.json" "$OUT/eval_$name.json"
-done
+"$PY" -m sftdpo report "$RUN" > "$OUT/report.md"
 [ -f "$RUN/config.json" ] && cp "$RUN/config.json" "$OUT/run_config.json"
 [ -f "$RUN/data/manifest.json" ] && cp "$RUN/data/manifest.json" "$OUT/data_manifest.json"
+for name in data_stats mining_stats; do
+  [ -f "$RUN/$name.json" ] && cp "$RUN/$name.json" "$OUT/$name.json"
+done
 for stage in sft dpo; do
-  [ -f "$RUN/$stage/manifest.json" ] && cp "$RUN/$stage/manifest.json" "$OUT/${stage}_manifest.json"
+  for artefact in manifest summary; do
+    [ -f "$RUN/$stage/$artefact.json" ] && cp "$RUN/$stage/$artefact.json" "$OUT/${stage}_$artefact.json"
+  done
   [ -f "$RUN/$stage/train_log.jsonl" ] && cp "$RUN/$stage/train_log.jsonl" "$OUT/${stage}_train_log.jsonl"
 done
-# Into their own directory: a stage record and an evaluation report share a file name and
-# the stage record is the smaller of the two, so a flat copy would silently lose the report.
-mkdir -p "$OUT/stages"
-[ -d "$RUN/stages" ] && cp "$RUN"/stages/*.json "$OUT/stages/" 2>/dev/null || true
+[ -f "$RUN/dpo/reward_log.jsonl" ] && cp "$RUN/dpo/reward_log.jsonl" "$OUT/dpo_reward_log.jsonl"
 ls -1 "$OUT"
 
 echo "Done. Every number in docs/RESULTS.md should trace to a file under $OUT."

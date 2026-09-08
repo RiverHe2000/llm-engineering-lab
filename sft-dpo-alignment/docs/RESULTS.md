@@ -257,8 +257,11 @@ Same data, same 168 steps, same 671 pairs, `dpo_learning_rate = 1e-5`:
 | 130 | +3.46 | +2.35 | 1.11 | 0.75 |
 | 168 | **+3.92** | **+1.46** | 2.46 | 1.00 |
 
-Both implicit rewards stay positive for all 168 steps, and the margin is bought by holding
-the chosen completions up rather than by pushing the rejected ones down. The reference is the
+Both implicit rewards stay positive at every one of the seventeen logged steps. The margin is
+still earned mostly on the rejected side — it falls about three nats over the run — but the
+chosen side ends within a nat of where supervised fine-tuning left it and never drops below
+the reference, which is the difference between a policy that has learned a preference and
+one that has walked away from the format. The reference is the
 *base* checkpoint — `reference_context` switches the adapter off, and the adapter being
 trained is the supervised one — so the +4.67 at step 10 is mostly what supervised fine-tuning
 had already earned before preference training moved anything. That is what makes the collapsed
@@ -355,7 +358,7 @@ directly — `python scripts/field_coverage_probe.py --field flags`, whose outpu
 | Records with no `flags` key at all | 38 / 156 parsed | **160 / 160** |
 | Flags emitted in total | 147 | **0** |
 | Flag recall (of 200 gold flags) | 0.610 | **0.000** |
-| Flag precision | 0.830 | — |
+| Flag precision | 0.830 | — (the file says 1.0: nothing emitted is no precision failure) |
 
 **The preference stage taught the model to delete a field.** Not to get it wrong — to stop
 emitting it, on every record in the split.

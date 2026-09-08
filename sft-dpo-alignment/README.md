@@ -143,7 +143,7 @@ decisions and their trade-offs are in [`docs/INTERVIEW_NOTES.md`](docs/INTERVIEW
 |---|---|
 | Lint and format | `ruff` (pinned 0.16.6), broad rule set, line length 100 |
 | Types | `mypy --strict` over `src/` **and** `tests/` |
-| Tests | **1 691 tests, 99.6 % branch coverage**, CPU, offline, no downloads |
+| Tests | **1 709 tests, 99.6 % branch coverage**, CPU, offline, no downloads |
 | CI | Python 3.12 and 3.13; the TRL cross-check; the whole pipeline end to end on a 9.8 M-parameter model |
 
 The CI model is a two-layer Qwen2 built from a config — 9.8 M parameters, no download, and a

@@ -1,30 +1,29 @@
 {
   "sft": {
     "counts": {
-      "flags_exact": 88,
-      "flags_not_a_list": 5,
-      "dropped_all_flags": 37,
-      "flags_key_absent": 38,
-      "flags_partial_or_wrong": 23,
-      "unparseable": 4,
-      "both_empty": 8
+      "both_empty": 8,
+      "dropped_every_member": 37,
+      "exact": 88,
+      "key_absent": 38,
+      "partial_or_wrong": 23,
+      "unparseable": 4
     },
-    "gold_flags": 200,
-    "emitted_flags": 147,
-    "correct_flags": 122,
-    "flag_recall": 0.61,
-    "flag_precision": 0.8299319727891157
+    "gold_members": 200,
+    "emitted_members": 147,
+    "correct_members": 122,
+    "recall": 0.61,
+    "precision": 0.8299319727891157
   },
   "dpo": {
     "counts": {
-      "flags_key_absent": 160,
-      "dropped_all_flags": 152,
-      "both_empty": 8
+      "both_empty": 8,
+      "dropped_every_member": 152,
+      "key_absent": 160
     },
-    "gold_flags": 200,
-    "emitted_flags": 0,
-    "correct_flags": 0,
-    "flag_recall": 0.0,
-    "flag_precision": 0.0
+    "gold_members": 200,
+    "emitted_members": 0,
+    "correct_members": 0,
+    "recall": 0.0,
+    "precision": 1.0
   }
 }

@@ -12,8 +12,9 @@ cd "$(dirname "$0")/.."
 RUN=${1:-runs/main}
 OUT=docs/experiments
 mkdir -p "$OUT"
-export HF_HUB_OFFLINE=1
 export TOKENIZERS_PARALLELISM=false
+# No HF_HUB_OFFLINE here: the 4 B checkpoint is a hub id, and forcing offline mode on a
+# machine that has not downloaded it yet turns the first run into an immediate failure.
 
 SMALL=${SFTDPO_SMALL_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
 MID=${SFTDPO_MID_MODEL:-Qwen/Qwen2.5-1.5B-Instruct}

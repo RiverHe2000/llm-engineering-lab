@@ -131,15 +131,38 @@ def _add_lora_options(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def _add_train_options(parser: argparse.ArgumentParser) -> None:
+def _add_train_options(
+    parser: argparse.ArgumentParser,
+    *,
+    lr: float = 1e-4,
+    batch_size: int = 4,
+    grad_accum: int = 1,
+) -> None:
+    """The options both trainers share, with defaults the caller sets per stage.
+
+    The defaults are parameters rather than constants because the two stages must not share
+    them. A preference step puts four sequences through the model where a supervised step
+    puts one, and 1e-4 is an ordinary supervised rate and a destructive preference one: the
+    first real DPO run inherited it and collapsed. `PipelineConfig` already keeps the two
+    apart; the standalone `dpo train` command has to as well, or a reader following the
+    README's per-stage commands reproduces the collapse.
+    """
     parser.add_argument("--epochs", type=int, default=1, help="passes over the data (default: 1)")
     parser.add_argument(
         "--max-steps", type=int, default=None, help="hard cap on optimiser steps; overrides epochs"
     )
-    parser.add_argument("--lr", type=float, default=1e-4, help="peak learning rate")
-    parser.add_argument("--batch-size", type=int, default=4, help="examples per forward pass")
+    parser.add_argument("--lr", type=float, default=lr, help=f"peak learning rate (default: {lr})")
     parser.add_argument(
-        "--grad-accum", type=int, default=1, help="micro-batches per optimiser step"
+        "--batch-size",
+        type=int,
+        default=batch_size,
+        help=f"examples per forward pass (default: {batch_size})",
+    )
+    parser.add_argument(
+        "--grad-accum",
+        type=int,
+        default=grad_accum,
+        help=f"micro-batches per optimiser step (default: {grad_accum})",
     )
     parser.add_argument(
         "--max-seq-length",
@@ -855,7 +878,9 @@ def _build_dpo(commands: _SubParsers) -> None:
         action="store_true",
         help="score completions per token instead of per sequence",
     )
-    _add_train_options(train)
+    # The pipeline's preference-stage defaults, not the supervised trainer's: see
+    # `_add_train_options` for why the two must differ.
+    _add_train_options(train, lr=1e-5, batch_size=1, grad_accum=4)
     _add_lora_options(train)
     _add_runtime_options(train)
     train.set_defaults(handler=_cmd_dpo_train)
