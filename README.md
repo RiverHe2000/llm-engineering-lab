@@ -1,9 +1,9 @@
 # llm-engineering-lab
 
-[![transformer-from-scratch](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/transformer-from-scratch-ci.yml/badge.svg)](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/transformer-from-scratch-ci.yml)
-[![lora-finetune-eval](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/lora-finetune-eval-ci.yml/badge.svg)](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/lora-finetune-eval-ci.yml)
-[![llm-inference-server](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/llm-inference-server-ci.yml/badge.svg)](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/llm-inference-server-ci.yml)
-[![sft-dpo-alignment](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml/badge.svg)](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml)
+[![transformer-from-scratch](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/transformer-from-scratch-ci.yml/badge.svg)](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/transformer-from-scratch-ci.yml)
+[![lora-finetune-eval](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/lora-finetune-eval-ci.yml/badge.svg)](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/lora-finetune-eval-ci.yml)
+[![llm-inference-server](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/llm-inference-server-ci.yml/badge.svg)](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/llm-inference-server-ci.yml)
+[![sft-dpo-alignment](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml/badge.svg)](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml)
 
 Four self-contained projects covering the life-cycle of a Transformer language model —
 **build it, adapt it, serve it, align it** — each written to the standard I would hold
@@ -17,8 +17,8 @@ documented with the trade-offs made.
 | 03 | [llm-inference-server](llm-inference-server/) — `llmserve` | KV-cached batched generation with left padding and row eviction, async dynamic batching, INT8, Prometheus metrics, FastAPI, Docker | Dynamic batching: **29× throughput at batch 32 for +7 % latency** (Qwen2.5-0.5B); 16 concurrent requests in 2.4 s vs 23 s sequential; **68 tests, 96 % coverage** |
 | 04 | [sft-dpo-alignment](sft-dpo-alignment/) — `sftdpo` | LoRA supervised fine-tuning then DPO written from the paper (sigmoid/IPO/cDPO), with the preference label supplied by a deterministic verifier instead of a human or a judge model; paired statistics and a promotion gate with floors | Qwen2.5-0.5B on a schema-constrained extraction task: **schema-valid output 23.1 % → 83.1 %** after supervised fine-tuning and **98.8 %** after alignment, on 4.4 M trainable parameters (0.88 %), and the JSON repair step in front of the model becomes unnecessary (23 → **0** completions repaired). The aligned 0.5 B beats a prompted **Qwen3-4B** on every metric (**0.988 vs 0.763**, +0.225 paired [+0.163, +0.294]) — though the 4 B is perfect on four of six slices and collapses only where the input is long or the record large. Two failures are the write-up's real subject: a preference run that **destroyed the model** while every training metric looked healthy, and a later run that passed every gate rule while **deleting an optional field from all 160 records** because the reward made silence cheaper than being right 83 % of the time. The gate now compares recall per field and rejects it. My DPO loss agrees with TRL to **1.07e-14**; **1 709 tests, 99.6 % coverage** |
 
-Companion repositories: [`genai-platform-lab`](https://github.com/ChuanHe-PhD/genai-platform-lab)
-(RAG, agents with guardrails, an LLM gateway) and [`mlops-lab`](https://github.com/ChuanHe-PhD/mlops-lab)
+Companion repositories: [`genai-platform-lab`](https://github.com/RiverHe2000/genai-platform-lab)
+(RAG, agents with guardrails, an LLM gateway) and [`mlops-lab`](https://github.com/RiverHe2000/mlops-lab)
 (MLflow lifecycle, SageMaker deployment, drift monitoring).
 
 ---

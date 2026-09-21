@@ -1,13 +1,13 @@
 # sft-dpo-alignment — `sftdpo`
 
-[![CI](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml/badge.svg)](https://github.com/ChuanHe-PhD/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml)
+[![CI](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml/badge.svg)](https://github.com/RiverHe2000/llm-engineering-lab/actions/workflows/sft-dpo-alignment-ci.yml)
 
 Supervised fine-tuning and then **Direct Preference Optimisation** of a 0.5 B instruct model
 on a schema-constrained extraction task, where the preference label comes from a
 **deterministic verifier** instead of a human or a judge model.
 
 The project starts from a measured failure. A companion project of mine,
-[`llm-app-ops-loop`](https://github.com/ChuanHe-PhD/advice-ai-lab), has a prompt-regression
+[`llm-app-ops-loop`](https://github.com/RiverHe2000/advice-ai-lab), has a prompt-regression
 gate that refused to promote either of two candidate prompts, because both scored 0 out of 2
 on the cases that required JSON output. Prompt engineering did not move it. This project
 asks whether training does, and holds the answer to the same paired statistics.

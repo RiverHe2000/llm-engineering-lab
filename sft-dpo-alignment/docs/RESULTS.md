@@ -26,7 +26,7 @@ examples:
 Three in four completions are JSON; fewer than one in four is a record the schema accepts.
 That gap is the whole problem: the output *looks* structured and is not usable. Prompt
 engineering did not close it — this is the same floor a promotion gate in my
-[`llm-app-ops-loop`](https://github.com/ChuanHe-PhD/advice-ai-lab) project refused to promote
+[`llm-app-ops-loop`](https://github.com/RiverHe2000/advice-ai-lab) project refused to promote
 either candidate prompt past.
 
 Where the base model fails, counted by the verifier's taxonomy over 160 completions
