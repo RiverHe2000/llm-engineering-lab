@@ -13,7 +13,7 @@ sentences from financial news with unanimous annotator agreement, e.g.
 |---|---|
 | Quality gates | `ruff`, `mypy --strict`, **83 tests** (all offline, CPU, ≈ 6 s), **98 % branch coverage** |
 | Base model | `distilbert/distilbert-base-uncased` (67 M params) — any `AutoModelForSequenceClassification` works |
-| Headline result | **LoRA r = 8 trains 1.1 % of the parameters and matches full fine-tuning** (95.9 % vs 94.4 % accuracy, McNemar p = 0.125) |
+| Headline result | **LoRA r = 8 trains 1.1 % of the parameters**; 95.9 % vs 94.4 % accuracy on this 340-example test set, with no statistically significant difference detected (McNemar p = 0.125). This does not establish equivalence |
 
 ---
 
@@ -21,7 +21,7 @@ sentences from financial news with unanimous annotator agreement, e.g.
 
 | Piece | File | Notes |
 |---|---|---|
-| LoRA layer | `lora.py::LoRALinear` | `y = Wx + b + (α/r)·B·A·x`; `A` Kaiming-init, `B` zero, so the adapted model equals the base model at step 0. `merge()` folds `ΔW` into `W` for zero-overhead inference; `unmerge()` restores it bit-for-bit. |
+| LoRA layer | `lora.py::LoRALinear` | `y = Wx + b + (α/r)·B·A·x`; `A` Kaiming-init, `B` zero, so the adapted model equals the base model at step 0. `merge()` folds `ΔW` into `W` for zero-overhead inference; `unmerge()` restores it within floating-point tolerance (tested to 1e-6). |
 | Model surgery | `lora.py::inject_lora` | Regex over `named_modules()` picks which `nn.Linear`s to wrap (`q_lin|v_lin` by default). `mark_only_lora_as_trainable` freezes everything else except the head. Adapter-only `state_dict` (0.3 MB vs 268 MB). |
 | Strategies | `models.py::apply_strategy` | `head` (linear probe), `lora`, `full`, all through one code path so the comparison is fair. |
 | Data | `data.py` | Downloads the raw zip via `huggingface_hub` (the old `datasets` loading script is no longer supported), parses `sentence@label` (Latin-1), **stratified** train/val/test split, dynamic padding. |
@@ -58,14 +58,15 @@ Paired comparison against full fine-tuning (McNemar, same 340 test sentences):
 
 * A linear probe on frozen DistilBERT is clearly insufficient (−9 points, p < 1e-4): the
   encoder itself has to adapt to financial language.
-* LoRA on the attention q/v projections recovers everything full fine-tuning gets, with
-  1 % of the trainable parameters and a 0.3 MB artefact instead of 268 MB. The +1.5-point
-  edge over full FT is *not* statistically significant (8 discordant pairs); the honest
-  claim is "indistinguishable", and a plausible mechanism is that the low-rank constraint
-  regularises on a 1 584-sentence training set.
+* LoRA on the attention q/v projections uses about 1 % of the trainable parameters. Its
+  +1.5-point accuracy difference from full FT is *not* statistically significant (7 discordant
+  pairs: 1 baseline-only correct, 6 LoRA-only correct). This run detected no difference; it
+  did not prove equivalence or non-inferiority. Those claims need a predeclared margin and a
+  paired interval, ideally across training seeds. Low-rank regularisation on 1 584 training
+  sentences is a plausible explanation to investigate, not an established cause.
 * Increasing `r` from 4 to 16 changes accuracy by 0.6 points — inside the noise. The
-  rank-16 row reaches p = 0.03, but with six comparisons against the same baseline that
-  is what one would expect from multiple testing; I would not report it as a real effect.
+  rank-16 row reaches p = 0.03, but it does not survive a conservative correction for the
+  multiple baseline comparisons; I would not report it as established superiority.
 * Applying LoRA to *all* linear layers at the same `r` did not help here (it did in QLoRA
   on much larger models); more adapted parameters ≠ better on 1.6 k examples.
 * Calibration is good across the board (ECE 0.03–0.05), i.e. a 90 % confident prediction
@@ -134,8 +135,8 @@ See [docs/INTERVIEW_NOTES.md](docs/INTERVIEW_NOTES.md).
 
 ## Related projects
 
-This repository is one of three standalone projects that together cover a Transformer's
-life-cycle — build it, adapt it, serve it — all held to the same engineering standard
+This directory is one of four standalone projects covering a Transformer's
+life-cycle — build it, adapt it, serve it, align it — all held to the same engineering standard
 (ruff, `mypy --strict`, offline CPU test suites with coverage gates, matrix CI):
 
 * **transformer-from-scratch** (`nanoformer`) — a LLaMA-style decoder, byte-level BPE and an
@@ -144,3 +145,5 @@ life-cycle — build it, adapt it, serve it — all held to the same engineering
   rigorous evaluation harness, applied to financial sentiment classification.
 * **llm-inference-server** (`llmserve`) — KV-cached batched generation, dynamic batching,
   INT8, Prometheus metrics, FastAPI and Docker for any Hugging Face causal LM.
+
+* **[sft-dpo-alignment](../sft-dpo-alignment/)** — verifier-led fine-tuning and a release gate that catches field deletion.

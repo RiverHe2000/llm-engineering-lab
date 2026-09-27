@@ -1,6 +1,7 @@
 name: CI · sft-dpo-alignment
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ["sft-dpo-alignment/**", ".github/workflows/sft-dpo-alignment-ci.yml"]

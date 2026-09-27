@@ -60,10 +60,15 @@ unpaired comparison of two accuracies ignores that most examples are easy for bo
 and has far less power. Exact binomial for small counts, χ² with continuity correction
 otherwise.
 
-**Rank 16 got p = 0.03 — is LoRA-16 better than full FT?** I would not claim it. Six
-models were compared against the same baseline; at α = 0.05 one false positive in six is
-expected. The effect (6 vs 0 discordant pairs, 1.8 points) is within the CI overlap. The
-defensible statement is "LoRA r ∈ {4, 8, 16} is indistinguishable from full fine-tuning."
+**Rank 16 got p = 0.03 — is LoRA-16 better than full FT?** I would not claim it. Several
+configurations were compared with the same baseline, and that p-value does not survive a
+conservative correction for multiple comparisons. The effect is 6 vs 0 discordant pairs,
+or 1.8 points, in one training-seed run. The
+defensible statement is "this single-seed test did not establish a reliable accuracy advantage
+for LoRA over full fine-tuning after accounting for the comparisons." A non-significant
+difference does not establish equivalence; that requires a predeclared margin and a paired
+interval. Additional training seeds would help separate optimisation variance from test-set
+sampling uncertainty.
 
 **What is expected calibration error and why report it?** Bin predictions by confidence;
 within each bin compare average confidence with empirical accuracy; ECE is the

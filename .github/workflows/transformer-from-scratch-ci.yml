@@ -1,6 +1,7 @@
 name: CI · transformer-from-scratch
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ["transformer-from-scratch/**", ".github/workflows/transformer-from-scratch-ci.yml"]

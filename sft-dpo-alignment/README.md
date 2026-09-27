@@ -6,6 +6,12 @@ Supervised fine-tuning and then **Direct Preference Optimisation** of a 0.5 B in
 on a schema-constrained extraction task, where the preference label comes from a
 **deterministic verifier** instead of a human or a judge model.
 
+**Main finding: the release gate must check what the model preserves, not just whether its
+JSON parses.** The historical DPO run reached 98.8% schema validity but deleted the optional
+`flags` field from every test record; exact match fell from 43.8% to 5.0%. The field-recall
+gate now returns **REJECT**. The useful outcome is a caught reward-design failure, not a
+deployable aligned model.
+
 The project starts from a measured failure. A companion project of mine,
 [`llm-app-ops-loop`](https://github.com/RiverHe2000/advice-ai-lab), has a prompt-regression
 gate that refused to promote either of two candidate prompts, because both scored 0 out of 2
@@ -117,8 +123,9 @@ margin. The promotion gate rejected it on every slice. The cause was a learning 
 with the supervised stage; the fix is a separate one, and the failed run's artefacts are
 committed rather than deleted.
 
-The corrected run took schema validity to **98.8 %**, and the aligned 0.5 B beat a prompted
-**Qwen3-4B** — eight times its size — on every metric (schema validity 0.988 against 0.763,
+The lower-learning-rate run took schema validity to **98.8 %**. On this synthetic extraction
+set, its reported aggregate metrics exceeded the prompted **Qwen3-4B** comparison (schema
+validity 0.988 against 0.763,
 paired difference +0.225 [+0.163, +0.294], McNemar p = 2.8e-10). Every gate said promote. One
 number disagreed: exact match fell 0.438 → 0.050. Following it up found that the preference stage
 had taught the model to **stop emitting the optional `flags` array entirely** — 0 of 160
@@ -128,6 +135,12 @@ the verifier measured what it was told to measure. No aggregate over records cou
 field that vanished from every record, and no slice regressed. `EvalReport` now carries
 per-field coverage and the gate carries `max_field_recall_drop`, which turns that promotion
 into a **REJECT** naming the field and the number.
+
+This comparison uses 160 examples from the same deterministic task generator as training.
+It does not establish broad superiority over a 4 B model or generalisation to independent
+adviser notes. A constrained-decoding baseline and an independently authored holdout remain
+future experiments. The committed real-model artefacts are preserved; the current offline
+checks do not imply that these experiments were rerun.
 
 See [`docs/RESULTS.md`](docs/RESULTS.md) for all of it: base against SFT against DPO, per
 slice, with paired intervals and the gates; the mining yield and what the rejected

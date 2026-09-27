@@ -1,6 +1,7 @@
 name: CI · lora-finetune-eval
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ["lora-finetune-eval/**", ".github/workflows/lora-finetune-eval-ci.yml"]

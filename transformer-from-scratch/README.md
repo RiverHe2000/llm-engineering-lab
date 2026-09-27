@@ -150,8 +150,8 @@ built to answer.
 
 ## Related projects
 
-This repository is one of three standalone projects that together cover a Transformer's
-life-cycle — build it, adapt it, serve it — all held to the same engineering standard
+This directory is one of four standalone projects covering a Transformer's
+life-cycle — build it, adapt it, serve it, align it — all held to the same engineering standard
 (ruff, `mypy --strict`, offline CPU test suites with coverage gates, matrix CI):
 
 * **transformer-from-scratch** (`nanoformer`) — a LLaMA-style decoder, byte-level BPE and an
@@ -160,3 +160,5 @@ life-cycle — build it, adapt it, serve it — all held to the same engineering
   rigorous evaluation harness, applied to financial sentiment classification.
 * **llm-inference-server** (`llmserve`) — KV-cached batched generation, dynamic batching,
   INT8, Prometheus metrics, FastAPI and Docker for any Hugging Face causal LM.
+
+* **[sft-dpo-alignment](../sft-dpo-alignment/)** — verifier-led fine-tuning and a release gate that catches field deletion.

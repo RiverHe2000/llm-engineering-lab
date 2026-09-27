@@ -1,6 +1,7 @@
 name: CI · llm-inference-server
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths: ["llm-inference-server/**", ".github/workflows/llm-inference-server-ci.yml"]

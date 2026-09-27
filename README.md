@@ -12,16 +12,23 @@ documented with the trade-offs made.
 
 | # | Project | What it demonstrates | Headline result |
 |---|---|---|---|
-| 01 | [transformer-from-scratch](transformer-from-scratch/) — `nanoformer` | Decoder-only Transformer (RMSNorm, RoPE, GQA, SwiGLU, KV cache) + byte-level BPE + AMP trainer with bit-exact resume | 9.4 M params → **val ppl 27.3** on Tiny Shakespeare in 65 s on one RTX 4070; **131 tests, 98.8 % coverage** |
-| 02 | [lora-finetune-eval](lora-finetune-eval/) — `loraeval` | LoRA implemented from first principles, three fine-tuning strategies, bootstrap CIs, McNemar paired tests, calibration, auditable run artefacts | LoRA r = 8 (1.1 % trainable) **matches full fine-tuning** on Financial PhraseBank: 95.9 % vs 94.4 %, p = 0.125; **83 tests, 98 % coverage** |
-| 03 | [llm-inference-server](llm-inference-server/) — `llmserve` | KV-cached batched generation with left padding and row eviction, async dynamic batching, INT8, Prometheus metrics, FastAPI, Docker | Dynamic batching: **29× throughput at batch 32 for +7 % latency** (Qwen2.5-0.5B); 16 concurrent requests in 2.4 s vs 23 s sequential; **68 tests, 96 % coverage** |
-| 04 | [sft-dpo-alignment](sft-dpo-alignment/) — `sftdpo` | LoRA supervised fine-tuning then DPO written from the paper (sigmoid/IPO/cDPO), with the preference label supplied by a deterministic verifier instead of a human or a judge model; paired statistics and a promotion gate with floors | Qwen2.5-0.5B on a schema-constrained extraction task: **schema-valid output 23.1 % → 83.1 %** after supervised fine-tuning and **98.8 %** after alignment, on 4.4 M trainable parameters (0.88 %), and the JSON repair step in front of the model becomes unnecessary (23 → **0** completions repaired). The aligned 0.5 B beats a prompted **Qwen3-4B** on every metric (**0.988 vs 0.763**, +0.225 paired [+0.163, +0.294]) — though the 4 B is perfect on four of six slices and collapses only where the input is long or the record large. Two failures are the write-up's real subject: a preference run that **destroyed the model** while every training metric looked healthy, and a later run that passed every gate rule while **deleting an optional field from all 160 records** because the reward made silence cheaper than being right 83 % of the time. The gate now compares recall per field and rejects it. My DPO loss agrees with TRL to **1.07e-14**; **1 709 tests, 99.6 % coverage** |
+| 01 | [transformer-from-scratch](transformer-from-scratch/) | Transformer, tokenizer and resumable trainer from first principles | 9.4 M non-embedding parameters; validation perplexity **27.3** on Tiny Shakespeare, one RTX 4070. [Evidence](transformer-from-scratch/README.md#2-results) |
+| 02 | [lora-finetune-eval](lora-finetune-eval/) | Parameter-efficient adaptation with paired evaluation | **1.1% trainable parameters**; 95.9% vs 94.4% full-FT accuracy on 340 Financial PhraseBank examples. No significant difference detected; equivalence is unproven. [Evidence](lora-finetune-eval/docs/RESULTS.md) |
+| 03 | [llm-inference-server](llm-inference-server/) | Correct batched generation, back-pressure and serving observability | **29× throughput** comparing batch 32 with batch 1 on Qwen2.5-0.5B and one RTX 4070. This is an eager-PyTorch batching comparison, not a vLLM comparison. [Evidence](llm-inference-server/docs/BENCHMARK.md) |
+| 04 | [sft-dpo-alignment](sft-dpo-alignment/) | Detecting reward hacking with field-level release checks | DPO reached **98.8% schema validity** while deleting all optional flags; exact match fell **43.8% → 5.0%**. The corrected gate **rejects** the model. [Failure analysis](sft-dpo-alignment/docs/RESULTS.md) |
 
 Companion repositories: [`genai-platform-lab`](https://github.com/RiverHe2000/genai-platform-lab)
 (RAG, agents with guardrails, an LLM gateway) and [`mlops-lab`](https://github.com/RiverHe2000/mlops-lab)
 (MLflow lifecycle, SageMaker deployment, drift monitoring).
 
 ---
+
+## Start here
+
+For an applied LLM role, start with the SFT/DPO failure analysis and its CPU smoke command.
+For a serving role, start with the inference benchmark and its documented limits. The
+committed GPU reports are historical experiments; offline CI checks implementation and
+reproducibility contracts, and does not rerun those model-quality claims.
 
 ## Why these four
 
