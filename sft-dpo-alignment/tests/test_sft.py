@@ -973,8 +973,10 @@ def test_gradient_accumulation_equals_one_larger_batch(
     recipe loses as soon as the examples differ in length, and it is why the loop
     accumulates summed token losses and normalises once, by tokens.
 
-    The gradient norm is the assertion that matters, and it agrees exactly. The weights are
-    checked far more loosely on purpose: Adam's first update is `g / (|g| + eps)`, so a
+    The gradient norm must agree within float32 reduction noise: a large batch and several
+    micro-batches can sum products in different orders on different CPU kernels. The tight
+    tolerance below still catches incorrect token weighting. The weights are checked far
+    more loosely on purpose: Adam's first update is `g / (|g| + eps)`, so a
     coordinate whose gradient is near zero turns a 1e-8 difference in `g` into a visible
     difference in the step. That is Adam's sensitivity, not an inexact accumulation.
     """
@@ -1004,7 +1006,7 @@ def test_gradient_accumulation_equals_one_larger_batch(
     big_loss, big_norm, big_weights = run(8, 1)
     split_loss, split_norm, split_weights = run(2, 4)
     assert split_loss == pytest.approx(big_loss, rel=1e-6)
-    assert split_norm == big_norm
+    assert split_norm == pytest.approx(big_norm, rel=1e-6, abs=1e-7)
     for one, many in zip(big_weights, split_weights, strict=True):
         assert torch.allclose(one, many, atol=1e-3)
 
